@@ -62,18 +62,19 @@ button:hover {
     text-align: center;
 }
 
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-    }
-    #resultado {
-    margin-top: 20px;
-    text-align: center;
-}
-
 canvas {
     margin-top: 20px;
     max-width: 100%;
 }
 
+@media (min-width: 768px) {
+    .container {
+        max-width: 600px;
+    }
+}
 
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}
