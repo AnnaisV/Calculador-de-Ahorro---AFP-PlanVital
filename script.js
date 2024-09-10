@@ -3,13 +3,20 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const comisionOrigen = parseFloat(document.getElementById('afpOrigen').value);
     const comisionPlanVital = 1.16; // Comisión de PlanVital fija
 
-    // Máximo imponible permitido
+    // Valores mínimo y máximo
+    const minImponible = 500000;
     const maxImponible = 3182702;
 
-    // Si el salario supera el máximo imponible, usar el máximo para el cálculo
+    // Validar si el salario es menor al mínimo permitido
+    if (salario < minImponible) {
+        alert(`El salario ingresado es menor al mínimo permitido. Se calculará con $${minImponible.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}.`);
+        salario = minImponible;
+    }
+
+    // Validar si el salario es mayor al máximo permitido
     if (salario > maxImponible) {
+        alert(`El salario ingresado supera el máximo imponible permitido. Se calculará con $${maxImponible.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}.`);
         salario = maxImponible;
-        alert(`El salario ingresado supera el máximo imponible permitido. El cálculo se realizará con $${maxImponible.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}.`);
     }
 
     if (isNaN(salario) || salario <= 0) {
