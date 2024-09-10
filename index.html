@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculador de Ahorro - AFP PlanVital</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Calculador de Ahorro AFP</h1>
         <form id="calculadorForm">
-            <label for="salario">Sueldo Imponible:</label>
+            <label for="salario">Sueldo Imponible (máx: $3.182.702):</label>
             <input type="number" id="salario" placeholder="Ingrese su sueldo imponible" required>
 
             <label for="afpOrigen">Seleccione su AFP de Origen:</label>
@@ -24,19 +25,17 @@
                 <option value="0.49">Uno - 0.49%</option>
             </select>
 
-            <label for="comisionPlanVital">Comisión AFP PlanVital (%):</label>
-            <input type="number" id="comisionPlanVital" value="1.16" readonly>
-
             <button type="button" id="calcularBtn">Calcular Ahorro/Pérdida</button>
         </form>
 
         <div id="resultado" class="hidden">
             <h2>Resultado</h2>
             <p id="ahorroMensaje"></p>
-            <button id="printBtn">Imprimir Resultado</button>
+            <canvas id="ahorroChart"></canvas>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
