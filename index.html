@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Ahorro - AFP PlanVital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculador de Ahorro AFP</h1>
+        <form id="calculadorForm">
+            <label for="salario">Sueldo Imponible:</label>
+            <input type="number" id="salario" placeholder="Ingrese su sueldo imponible" required>
+
+            <label for="afpOrigen">Seleccione su AFP de Origen:</label>
+            <select id="afpOrigen" required>
+                <option value="1.16">PlanVital - 1.16%</option>
+                <option value="1.44">Capital - 1.44%</option>
+                <option value="1.44">Cuprum - 1.44%</option>
+                <option value="1.27">Habitat - 1.27%</option>
+                <option value="0.58">Modelo - 0.58%</option>
+                <option value="1.45">Provida - 1.45%</option>
+                <option value="0.49">Uno - 0.49%</option>
+            </select>
+
+            <label for="comisionPlanVital">Comisión AFP PlanVital (%):</label>
+            <input type="number" id="comisionPlanVital" value="1.16" readonly>
+
+            <button type="button" id="calcularBtn">Calcular Ahorro/Pérdida</button>
+        </form>
+
+        <div id="resultado" class="hidden">
+            <h2>Resultado</h2>
+            <p id="ahorroMensaje"></p>
+            <button id="printBtn">Imprimir Resultado</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
