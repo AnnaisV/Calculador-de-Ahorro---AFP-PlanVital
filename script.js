@@ -50,17 +50,26 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
         window.myChart.destroy();
     }
 
-    // Mostrar el gráfico de barras
+    // Mostrar el gráfico de barras comparativo entre la AFP de origen y PlanVital
     const ctx = document.getElementById('ahorroChart').getContext('2d');
     window.myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Ahorro Mensual', 'Ahorro Anual'],
+            labels: ['AFP Origen', 'AFP PlanVital'],
             datasets: [{
-                label: 'Pesos chilenos',
-                data: [ahorroMensual, ahorroAnual],
-                backgroundColor: ['#d50000', '#d50000'],
-                borderColor: ['#b71c1c', '#b71c1c'],
+                label: 'Ahorro Mensual',
+                data: [
+                    salario * (comisionOrigen / 100), // Comisión de la AFP de origen
+                    salario * (comisionPlanVital / 100) // Comisión de PlanVital
+                ],
+                backgroundColor: [
+                    '#808080', // Color gris para la AFP de origen
+                    '#d50000'  // Color rojo para PlanVital
+                ],
+                borderColor: [
+                    '#666666', // Borde gris para la AFP de origen
+                    '#b71c1c'  // Borde rojo para PlanVital
+                ],
                 borderWidth: 1
             }]
         },
@@ -71,6 +80,16 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
                     ticks: {
                         callback: function(value) {
                             return '$' + value.toLocaleString();
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            return '$' + value.toLocaleString('es-CL');
                         }
                     }
                 }
