@@ -1,12 +1,15 @@
 document.getElementById('calcularBtn').addEventListener('click', function() {
     let salario = parseFloat(document.getElementById('salario').value);
     const comisionOrigen = parseFloat(document.getElementById('afpOrigen').value);
-    const comisionPlanVital = 1.16;
+    const comisionPlanVital = 1.16; // Comisión de PlanVital fija
 
-    // Limitar el sueldo imponible al máximo permitido
+    // Máximo imponible permitido
     const maxImponible = 3182702;
+
+    // Si el salario supera el máximo imponible, usar el máximo para el cálculo
     if (salario > maxImponible) {
         salario = maxImponible;
+        alert(`El salario ingresado supera el máximo imponible permitido. El cálculo se realizará con $${maxImponible.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}.`);
     }
 
     if (isNaN(salario) || salario <= 0) {
@@ -19,6 +22,7 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     const ahorroMensual = salario * (diferenciaComision / 100);
     const ahorroAnual = ahorroMensual * 12;
 
+    // Formatear números en pesos chilenos
     const ahorroMensualFormateado = ahorroMensual.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
     const ahorroAnualFormateado = ahorroAnual.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' });
 
@@ -34,9 +38,14 @@ document.getElementById('calcularBtn').addEventListener('click', function() {
     document.getElementById('ahorroMensaje').textContent = mensajeResultado;
     document.getElementById('resultado').classList.remove('hidden');
 
+    // Destruir el gráfico anterior si existe
+    if (window.myChart) {
+        window.myChart.destroy();
+    }
+
     // Mostrar el gráfico de barras
     const ctx = document.getElementById('ahorroChart').getContext('2d');
-    const chart = new Chart(ctx, {
+    window.myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Ahorro Mensual', 'Ahorro Anual'],
