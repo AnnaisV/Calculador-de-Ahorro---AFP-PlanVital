@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Formatear el salario mientras se escribe
     inputSalario.addEventListener('input', function(e) {
         let valor = inputSalario.value.replace(/\./g, ''); // Remover puntos existentes
-        inputSalario.value = parseFloat(valor).toLocaleString('es-CL'); // Agregar formato con puntos
+        if (!isNaN(valor) && valor !== '') {
+            inputSalario.value = parseFloat(valor).toLocaleString('es-CL'); // Agregar formato con puntos
+        }
     });
 
     // Ejecutar el cálculo al presionar Enter
